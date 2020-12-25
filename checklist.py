@@ -7,16 +7,16 @@ checklist.geometry('600x600')
 
 #Checklist FRAMES
 frame_0 = LabelFrame(checklist) #Study info frame
-frame_0.grid(row=0,column=1,columnspan=2,padx=10,pady=10,ipadx=10,ipady=5)
+frame_0.grid(row=0,column=0,columnspan=2,padx=10,pady=10,ipadx=10,ipady=5)
 frame_1 = LabelFrame(checklist) #Awarded study frame
-frame_1.grid(row=2,column=0,columnspan=2,padx=10,pady=10)
+frame_1.grid(row=0,column=2,columnspan=2,padx=10,pady=10)
 frame_2 = LabelFrame(checklist) #Localisation setup frame
-frame_2.grid(row=3,column=1,columnspan=2,padx=10,pady=10)
+frame_2.grid(row=2,column=1,columnspan=3,padx=10,pady=10)
 frame_3 = LabelFrame(checklist) #Implementation frame
-frame_3.grid(row=2,column=1,columnspan=2,padx=20,pady=10)
+frame_3.grid(row=3,column=1,columnspan=2,padx=20,pady=10)
 
 
-#Study info
+#Study info frame
 sponsor = Label(frame_0, text="Sponsor")
 sponsor.grid(row=0,column=0,pady=(10,0))
 study_code = Label(frame_0, text="Study Code")
@@ -25,6 +25,22 @@ sponsor_box = Entry(frame_0,width=20)
 sponsor_box.grid(row=0,column=1, pady=(10,0))
 study_code_box = Entry(frame_0,width=20)
 study_code_box.grid(row=1,column=1,pady=(10,0))
+language_number = Label(frame_0, text="Language number")
+language_number.grid(row=2,column=0,pady=(10,0))
+language_number_box = Entry(frame_0,width=20)
+language_number_box.grid(row=2,column=1,pady=(10,0))
+pm_name = Label(frame_0, text="Project Manager")
+pm_name.grid(row=3,column=0,pady=(10,0))
+pm_name_box = Entry(frame_0, width=20)
+pm_name_box.grid(row=3,column=1, pady=(10,0))
+ps_name = Label(frame_0, text="Project Delivery Specialist")
+ps_name.grid(row=4,column=0,pady=(10,0))
+ps_name_box = Entry(frame_0, width=20)
+ps_name_box.grid(row=4,column=1, pady=(10,0))
+device_type = Label(frame_0,text="Device")
+device_type.grid(row=5,column=0,pady=(10,0))
+device_type_box=Entry(frame_0,width=20)
+device_type_box.grid(row=5,column=1,pady=(10,0))
 
 #LABELS
 """Awardeded Study frame labels"""
