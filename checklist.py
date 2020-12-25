@@ -82,8 +82,7 @@ def frames():
                 })
         conn.commit()
         conn.close()
-
-        #clear data
+        checklist.destroy()
 
 
     #Add Study
