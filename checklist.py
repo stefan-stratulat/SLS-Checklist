@@ -1,22 +1,103 @@
 from tkinter import *
-#CHECKLIST FORM
+import sqlite3
 
-def checklist():
+conn = sqlite3.connect('studies.db')
+c = conn.cursor()
+
+
+def frames():
     checklist = Tk()
     checklist.title("SLS Checklist")
     checklist.geometry('1080x600')
 
     #Checklist FRAMES
     frame_0 = LabelFrame(checklist) #Study info frame
-    frame_0.grid(row=0,column=0,columnspan=2,padx=10,pady=10,ipadx=10,ipady=5)
     frame_1 = LabelFrame(checklist) #Awarded study frame
-    frame_1.grid(row=0,column=2,columnspan=2,padx=10,pady=10)
     frame_2 = LabelFrame(checklist) #Localisation setup frame
-    frame_2.grid(row=0,column=4,columnspan=3,padx=10,pady=10,ipadx=10,ipady=5)
     frame_3 = LabelFrame(checklist) #Implementation frame
-    frame_3.grid(row=2,column=0,columnspan=3,padx=20,pady=10)
     frame_4 = LabelFrame(checklist)  #TO DO Frame
+
+
+    #function for the submit button
+    def submit():
+        conn = sqlite3.connect('studies.db')
+        c =  conn.cursor()
+        c.execute('''INSERT INTO studies VALUES(
+                :sponsor,
+                :study_code,
+                :language_number,
+                :pm_name,
+                :pds_name,
+                :device_type,
+                :internal_kom,
+                :check_wf,
+                :sls_task,
+                :draft_lp,
+                :loca_kom,
+                :check_msr,
+                :check_mqrg,
+                :check_ldc,
+                :check_paper_source,
+                :check_translation_service,
+                :check_tft,
+                :check_irb,
+                :check_quote,
+                :check_po,
+                :add_quote_po_oct,
+                :loca_plan,
+                :access_ts_tm,
+                :assign_ls_wf,
+                :access_platform,
+                :handover_ls,
+                :notes,
+                :to_do)''',
+                {"sponsor": sponsor_box.get(),
+                "study_code": study_code_box.get(),
+                "language_number": language_number_box.get(),
+                "pm_name": pm_name_box.get(),
+                "pds_name": pds_name_box.get(),
+                "device_type": device_type_box.get(),
+                "internal_kom": internal_kom_var.get(),
+                "check_wf": check_wf_var.get(),
+                "sls_task": sls_task_var.get(),
+                "draft_lp": draft_lp_var.get(),
+                "loca_kom": loca_kom_var.get(),
+                "check_msr": check_msr_var.get(),
+                "check_mqrg": check_mqrg_var.get(),
+                "check_ldc": check_ldc_var.get(),
+                "check_paper_source": check_paper_source_var.get(),
+                "check_translation_service": check_translation_service_var.get(),
+                "check_tft": check_tft_var.get(),
+                "check_irb": check_irb_var.get(),
+                "check_quote": check_quote_var.get(),
+                "check_po": check_po_var.get(),
+                "add_quote_po_oct": add_quote_po_oct_var.get(),
+                "loca_plan": loca_plan_var.get(),
+                "access_ts_tm": access_ts_tm_var.get(),
+                "assign_ls_wf": assign_ls_wf_var.get(),
+                "access_platform": access_platform_var.get(),
+                "handover_ls": handover_ls_var.get(),
+                "notes": notes_text.get(1.0,END),
+                "to_do": to_do_textbox.get(1.0,END)
+                })
+        conn.commit()
+        conn.close()
+
+        #clear data
+
+
+    #Add Study
+    add_study = Button(checklist, text="Add study",command=submit, padx=5,pady=5)
+    #Update study
+    update_study = Button(checklist, text="Update study info",padx=5,pady=5)
+    #MAIN GRID
+    frame_0.grid(row=0,column=0,columnspan=2,padx=10,pady=10,ipadx=10,ipady=5)
+    frame_1.grid(row=0,column=2,columnspan=2,padx=10,pady=10)
+    frame_2.grid(row=0,column=4,columnspan=3,padx=10,pady=10,ipadx=10,ipady=5)
+    frame_3.grid(row=2,column=0,columnspan=3,padx=20,pady=10)
     frame_4.grid(row=2,column=4,columnspan=4,padx=10,pady=10)
+    add_study.grid(row=3,column=0)
+    update_study.grid(row=3,column=2)
 
 
     #Study info frame
@@ -92,11 +173,14 @@ def checklist():
     check_irb = Label(frame_2, text="Confirm IRB")
     check_quote = Label(frame_2, text="Create quotation requests")
     check_po = Label(frame_2, text="Create PO")
-    quote_po_oct = Label(frame_2, text="Add quote and PO in OCT")
+    add_quote_po_oct = Label(frame_2, text="Add quote and PO in OCT")
     loca_plan = Label(frame_2, text="Create final localisation plan")
     access_ts_tm = Label(frame_2, text="Get access in TS and TM")
-    assign_ls_wf = Label(frame_2,text="Assing LS in WF")
-    access_plaform = Label(frame_2,text="Get access in vendor platform(if needed)")
+    assign_ls_wf = Label(frame_2,text="Assign LS in WF")
+    access_platform = Label(frame_2,text="Get access in vendor platform(if needed)")
+    #global variables
+
+
 
     #variables for localisation setup frame checkboxes
     loca_kom_var = IntVar()
@@ -109,11 +193,11 @@ def checklist():
     check_irb_var = IntVar()
     check_quote_var = IntVar()
     check_po_var = IntVar()
-    quote_po_oct_var = IntVar()
+    add_quote_po_oct_var = IntVar()
     loca_plan_var = IntVar()
     access_ts_tm_var = IntVar()
     assign_ls_wf_var = IntVar()
-    access_plaform_var = IntVar()
+    access_platform_var = IntVar()
 
     #checkboxes for localisation setup
     loca_kom_cb = Checkbutton(frame_2, variable=loca_kom_var)
@@ -126,11 +210,11 @@ def checklist():
     check_irb_cb = Checkbutton(frame_2, variable=check_irb_var)
     check_quote_cb = Checkbutton(frame_2, variable=check_quote_var)
     check_po_cb = Checkbutton(frame_2, variable=check_po_var)
-    quote_po_oct_cb = Checkbutton(frame_2, variable=quote_po_oct_var)
+    add_quote_po_oct_cb = Checkbutton(frame_2, variable=add_quote_po_oct_var)
     loca_plan_cb = Checkbutton(frame_2, variable=loca_plan_var)
     access_ts_tm_cb = Checkbutton(frame_2, variable=access_ts_tm_var)
     assign_ls_wf_cb = Checkbutton(frame_2, variable=assign_ls_wf_var)
-    access_plaform_cb=Checkbutton(frame_2, variable=access_plaform_var)
+    access_platform_cb=Checkbutton(frame_2, variable=access_platform_var)
 
     #grid for localisation setup
     loca_setup.grid(row=0,column=0, columnspan=3,padx=70,pady=10)
@@ -144,11 +228,11 @@ def checklist():
     check_irb.grid(row=2,column=2)
     check_quote.grid(row=3,column=2)
     check_po.grid(row=4,column=2)
-    quote_po_oct.grid(row=5,column=2)
+    add_quote_po_oct.grid(row=5,column=2)
     loca_plan.grid(row=6,column=2)
     access_ts_tm.grid(row=7,column=2)
     assign_ls_wf.grid(row=8,column=2)
-    access_plaform.grid(row=9,column=2)
+    access_platform.grid(row=9,column=2)
     loca_kom_cb.grid(row=2,column=1)
     check_msr_cb.grid(row=3,column=1)
     check_mqrg_cb.grid(row=4,column=1)
@@ -159,11 +243,11 @@ def checklist():
     check_irb_cb.grid(row=2,column=3)
     check_quote_cb.grid(row=3,column=3)
     check_po_cb.grid(row=4,column=3)
-    quote_po_oct_cb.grid(row=5,column=3)
+    add_quote_po_oct_cb.grid(row=5,column=3)
     loca_plan_cb.grid(row=6,column=3)
     access_ts_tm_cb.grid(row=7,column=3)
     assign_ls_wf_cb.grid(row=8,column=3)
-    access_plaform_cb.grid(row=9,column=3)
+    access_platform_cb.grid(row=9,column=3)
 
     """Implementation frame"""
     implementation = Label(frame_3, text="Implementation")
@@ -191,6 +275,9 @@ def checklist():
     to_do.grid(row=0,column=1)
     to_do_textbox.grid(row=1,column=0,columnspan=4,padx=5,pady=5,ipadx=10)
 
-
-
     checklist.mainloop()
+
+
+frames()
+conn.commit()
+conn.close()

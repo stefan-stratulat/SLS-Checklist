@@ -1,6 +1,5 @@
 from tkinter import *
-from checklist import *
-
+from checklist import frames
 root = Tk()
 root.title("SLS Checklist")
 
@@ -13,7 +12,7 @@ main_frame.pack(padx=20,pady=20)
 
 
 add_study = Button(main_frame, text="Add new study", padx =10,
-    pady=10,command=checklist)
+    pady=10,command= frames)
 check_studies = Button(main_frame, text="Check studies",padx=10,
     pady=10,)
 
@@ -25,9 +24,6 @@ check_studies.grid(row=0,column=1, padx=10, pady=10)
 
 study_frame = LabelFrame(root, text="Studies",padx=20,pady=20)
 study_frame.pack()
-
-
-
 
 
 root.mainloop()
