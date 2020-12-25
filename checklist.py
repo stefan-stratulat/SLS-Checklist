@@ -36,10 +36,10 @@ def checklist():
     pm_name.grid(row=3,column=0,pady=(10,0))
     pm_name_box = Entry(frame_0, width=20)
     pm_name_box.grid(row=3,column=1, pady=(10,0))
-    ps_name = Label(frame_0, text="Project Delivery Specialist")
-    ps_name.grid(row=4,column=0,pady=(10,0))
-    ps_name_box = Entry(frame_0, width=20)
-    ps_name_box.grid(row=4,column=1, pady=(10,0))
+    pds_name = Label(frame_0, text="Project Delivery Specialist")
+    pds_name.grid(row=4,column=0,pady=(10,0))
+    pds_name_box = Entry(frame_0, width=20)
+    pds_name_box.grid(row=4,column=1, pady=(10,0))
     device_type = Label(frame_0,text="Device")
     device_type.grid(row=5,column=0,pady=(10,0))
     device_type_box=Entry(frame_0,width=20)
@@ -99,7 +99,6 @@ def checklist():
     access_plaform = Label(frame_2,text="Get access in vendor platform(if needed)")
 
     #variables for localisation setup frame checkboxes
-    loca_setup_var = IntVar()
     loca_kom_var = IntVar()
     check_msr_var = IntVar()
     check_mqrg_var = IntVar()
@@ -186,11 +185,11 @@ def checklist():
     #TO DO Frame
 
     to_do = Label(frame_4,text="TO DO")
-    to_do_textbox = Text(frame_4,width=35,height=15)
+    to_do_textbox = Text(frame_4,width=30,height=15,bd=2)
 
     #grid
-    to_do.grid(row=0,column=0,columnspan=3)
-    to_do_textbox.grid(row=1,column=0,columnspan=4)
+    to_do.grid(row=0,column=1)
+    to_do_textbox.grid(row=1,column=0,columnspan=4,padx=5,pady=5,ipadx=10)
 
 
 
