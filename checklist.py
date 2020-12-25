@@ -11,9 +11,11 @@ frame_0.grid(row=0,column=0,columnspan=2,padx=10,pady=10,ipadx=10,ipady=5)
 frame_1 = LabelFrame(checklist) #Awarded study frame
 frame_1.grid(row=0,column=2,columnspan=2,padx=10,pady=10)
 frame_2 = LabelFrame(checklist) #Localisation setup frame
-frame_2.grid(row=0,column=4,columnspan=3,padx=10,pady=10)
+frame_2.grid(row=0,column=4,columnspan=3,padx=10,pady=10,ipadx=10,ipady=5)
 frame_3 = LabelFrame(checklist) #Implementation frame
 frame_3.grid(row=2,column=0,columnspan=3,padx=20,pady=10)
+frame_4 = LabelFrame(checklist)  #TO DO Frame
+frame_4.grid(row=2,column=4,columnspan=3,padx=10,pady=10)
 
 
 #Study info frame
@@ -42,15 +44,42 @@ device_type.grid(row=5,column=0,pady=(10,0))
 device_type_box=Entry(frame_0,width=20)
 device_type_box.grid(row=5,column=1,pady=(10,0))
 
+
+"""Awardeded Study frame"""
 #LABELS
-"""Awardeded Study frame labels"""
 awarded_study = Label(frame_1,text='Awarded Study')
 internal_kom =Label(frame_1,text='Internal KOM')
 check_wf = Label(frame_1, text="Check WF plan")
 sls_task = Label(frame_1, text="Assign SLS in WF")
 draft_lp = Label(frame_1, text="Draft loc. plan")
 
-"""Localisation setup frame labels"""
+#variables for checkboxex
+internal_kom_var = IntVar()
+check_wf_var = IntVar()
+sls_task_var = IntVar()
+draft_lp_var = IntVar()
+
+#CHECKBOXES
+"""Awardeded Study frame checkboxes"""
+internal_kom_cb = Checkbutton(frame_1, variable=internal_kom_var)
+check_wf_cb = Checkbutton(frame_1, variable=check_wf_var)
+sls_task_cb = Checkbutton(frame_1, variable=sls_task_var)
+draft_lp_cb = Checkbutton(frame_1, variable=draft_lp_var)
+
+#grid
+awarded_study.grid(row=0,column=0, columnspan=2, pady=10)
+internal_kom.grid(row=1,column=0)
+check_wf.grid(row=2,column=0)
+sls_task.grid(row=3,column=0,)
+draft_lp.grid(row=4,column=0)
+internal_kom_cb.grid(row=1,column=1)
+check_wf_cb.grid(row=2,column=1,)
+sls_task_cb.grid(row=3,column=1)
+draft_lp_cb.grid(row=4,column=1)
+
+"""Localisation setup frame"""
+
+#labels
 loca_setup = Label(frame_2, text='Localisation setup')
 loca_kom = Label(frame_2, text='Localisation KOM date')
 check_msr = Label(frame_2,text='Check Master SR')
@@ -68,53 +97,7 @@ access_ts_tm = Label(frame_2, text="Get access in TS and TM")
 assign_ls_wf = Label(frame_2,text="Assing LS in WF")
 access_plaform = Label(frame_2,text="Get access in vendor platform(if needed)")
 
-"""Implementation frame"""
-implementation = Label(frame_3, text="Implementation")
-handover_ls = Label(frame_3, text="Handover info to LS")
-notes = Label(frame_3, text="NOTES")
-notes_text= Text(frame_3, width=40,height=10)
-
-
-
-#LABELS GRID
-"""Awarded study frame"""
-awarded_study.grid(row=0,column=0, columnspan=2, pady=10)
-internal_kom.grid(row=1,column=0)
-check_wf.grid(row=2,column=0)
-sls_task.grid(row=3,column=0,)
-draft_lp.grid(row=4,column=0)
-"""Localisation setup frame"""
-loca_setup.grid(row=0,column=0, columnspan=3,padx=70,pady=10)
-loca_kom.grid(row=2,column=0)
-check_msr.grid(row=3,column=0)
-check_mqrg.grid(row=4,column=0)
-check_ldc.grid(row=5,column=0)
-check_paper_source.grid(row=6,column=0)
-check_translation_service.grid(row=7,column=0)
-check_tft.grid(row=8,column=0)
-check_irb.grid(row=2,column=2)
-check_quote.grid(row=3,column=2)
-check_po.grid(row=4,column=2)
-quote_po_oct.grid(row=5,column=2)
-loca_plan.grid(row=6,column=2)
-access_ts_tm.grid(row=7,column=2)
-assign_ls_wf.grid(row=8,column=2)
-access_plaform.grid(row=9,column=2)
-
-"""Implementation"""
-implementation.grid(row=0,column=0, columnspan=2, pady=10)
-handover_ls.grid(row=1,column=0)
-notes.grid(row=2,column=0,columnspan=2)
-notes_text.grid(row=3,column=0,columnspan=2,padx=10,pady=5)
-
-#Variables for checkboxes
-"""Awarded studies"""
-internal_kom_var = IntVar()
-check_wf_var = IntVar()
-sls_task_var = IntVar()
-draft_lp_var = IntVar()
-
-"""Localisation setup var"""
+#variables for localisation setup frame checkboxes
 loca_setup_var = IntVar()
 loca_kom_var = IntVar()
 check_msr_var = IntVar()
@@ -131,17 +114,8 @@ loca_plan_var = IntVar()
 access_ts_tm_var = IntVar()
 assign_ls_wf_var = IntVar()
 access_plaform_var = IntVar()
-"""Implementation variables"""
-handover_ls_var=IntVar()
 
-#CHECKBOXES
-"""Awardeded Study frame checkboxes"""
-internal_kom_cb = Checkbutton(frame_1, variable=internal_kom_var)
-check_wf_cb = Checkbutton(frame_1, variable=check_wf_var)
-sls_task_cb = Checkbutton(frame_1, variable=sls_task_var)
-draft_lp_cb = Checkbutton(frame_1, variable=draft_lp_var)
-
-"""Localisation setup checkboxes"""
+#checkboxes for localisation setup
 loca_kom_cb = Checkbutton(frame_2, variable=loca_kom_var)
 check_msr_cb = Checkbutton(frame_2, variable=check_msr_var)
 check_mqrg_cb = Checkbutton(frame_2, variable=check_mqrg_var)
@@ -158,17 +132,23 @@ access_ts_tm_cb = Checkbutton(frame_2, variable=access_ts_tm_var)
 assign_ls_wf_cb = Checkbutton(frame_2, variable=assign_ls_wf_var)
 access_plaform_cb=Checkbutton(frame_2, variable=access_plaform_var)
 
-"""Implementation"""
-handover_ls_cb =Checkbutton(frame_3, variable=handover_ls_var)
-
-#CHECKBOXES GRID
-"""Awarded study"""
-internal_kom_cb.grid(row=1,column=1)
-check_wf_cb.grid(row=2,column=1,)
-sls_task_cb.grid(row=3,column=1)
-draft_lp_cb.grid(row=4,column=1)
-
-"""Localisation setup"""
+#grid for localisation setup
+loca_setup.grid(row=0,column=0, columnspan=3,padx=70,pady=10)
+loca_kom.grid(row=2,column=0)
+check_msr.grid(row=3,column=0)
+check_mqrg.grid(row=4,column=0)
+check_ldc.grid(row=5,column=0)
+check_paper_source.grid(row=6,column=0)
+check_translation_service.grid(row=7,column=0)
+check_tft.grid(row=8,column=0)
+check_irb.grid(row=2,column=2)
+check_quote.grid(row=3,column=2)
+check_po.grid(row=4,column=2)
+quote_po_oct.grid(row=5,column=2)
+loca_plan.grid(row=6,column=2)
+access_ts_tm.grid(row=7,column=2)
+assign_ls_wf.grid(row=8,column=2)
+access_plaform.grid(row=9,column=2)
 loca_kom_cb.grid(row=2,column=1)
 check_msr_cb.grid(row=3,column=1)
 check_mqrg_cb.grid(row=4,column=1)
@@ -184,8 +164,33 @@ loca_plan_cb.grid(row=6,column=3)
 access_ts_tm_cb.grid(row=7,column=3)
 assign_ls_wf_cb.grid(row=8,column=3)
 access_plaform_cb.grid(row=9,column=3)
-"""Inplementation"""
+
+"""Implementation frame"""
+implementation = Label(frame_3, text="Implementation")
+handover_ls = Label(frame_3, text="Handover info to LS")
+notes = Label(frame_3, text="NOTES")
+notes_text= Text(frame_3, width=40,height=10)
+
+handover_ls_var=IntVar()
+handover_ls_cb =Checkbutton(frame_3, variable=handover_ls_var)
+
+#grid
+implementation.grid(row=0,column=0, columnspan=2, pady=10)
+handover_ls.grid(row=1,column=0)
 handover_ls_cb.grid(row=1,column=1)
+notes.grid(row=2,column=0,columnspan=2)
+notes_text.grid(row=3,column=0,columnspan=2,padx=10,pady=5)
+
+
+#TO DO Frame
+
+to_do = Label(frame_4,text="TO DO")
+to_do_textbox = Text(frame_4,width=40,height=15)
+
+#grid
+to_do.grid(row=0,column=0,columnspan=3)
+to_do_textbox.grid(row=1,column=0,columnspan=3)
+
 
 
 checklist.mainloop()
