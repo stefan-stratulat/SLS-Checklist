@@ -1,5 +1,5 @@
 from tkinter import *
-import checklist
+from checklist import *
 
 root = Tk()
 root.title("SLS Checklist")
@@ -10,11 +10,10 @@ main_frame = LabelFrame(root, padx=30,pady=30)
 main_frame.pack(padx=20,pady=20)
 
 #function to open a new window for checklist
-#def add_study():
-   #checklist.checklist()
+
 
 add_study = Button(main_frame, text="Add new study", padx =10,
-    pady=10,command=add_study)
+    pady=10,command=checklist)
 check_studies = Button(main_frame, text="Check studies",padx=10,
     pady=10,)
 
