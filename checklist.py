@@ -1,6 +1,7 @@
 from tkinter import *
 from PIL import ImageTk, Image
 import sqlite3
+import main
 
 
 conn = sqlite3.connect('studies.db')
@@ -278,7 +279,216 @@ def frames():
 
     checklist.mainloop()
 
+def e_frames():
+    """Edited frames with DB data"""
+    e_checklist = Tk()
+    e_checklist.title("SLS Checklist")
+    e_checklist.iconbitmap('images/fire_eye_alien.ico')
+    e_checklist.configure(bg="#add8e6")
+    e_checklist.geometry('1000x650')
 
+    #Checklist FRAMES
+    e_frame_0 = LabelFrame(e_checklist) #Study info frame
+    e_frame_1 = LabelFrame(e_checklist) #Awarded study frame
+    e_frame_2 = LabelFrame(e_checklist) #Localisation setup frame
+    e_frame_3 = LabelFrame(e_checklist) #Implementation frame
+    e_frame_4 = LabelFrame(e_checklist)  #TO DO Frame
+
+    #function for the submit button
+
+
+    #Add Study
+    e_add_study = Button(e_checklist, text="Add study",state=DISABLED, padx=5,pady=5)
+    #Update study
+    e_update_study = Button(e_checklist, text="Update study info",padx=5,pady=5)
+    #MAIN GRID
+    e_frame_0.grid(row=0,column=0,columnspan=2,padx=10,pady=10,ipadx=10,ipady=5)
+    e_frame_1.grid(row=0,column=2,columnspan=2,padx=10,pady=10)
+    e_frame_2.grid(row=0,column=4,columnspan=3,padx=10,pady=10,ipadx=10,ipady=5)
+    e_frame_3.grid(row=2,column=0,columnspan=3,padx=20,pady=10)
+    e_frame_4.grid(row=2,column=4,columnspan=4,padx=10,pady=10)
+    e_add_study.grid(row=3,column=0)
+    e_update_study.grid(row=3,column=2)
+
+
+    #Study info frame
+    e_sponsor = Label(e_frame_0, text="Sponsor")
+    e_sponsor.grid(row=0,column=0,pady=(10,0))
+    e_study_code = Label(e_frame_0, text="Study Code")
+    e_study_code.grid(row=1,column=0,pady=(10,0))
+    e_sponsor_box = Entry(e_frame_0,width=20)
+    e_sponsor_box.grid(row=0,column=1, pady=(10,0))
+    e_study_code_box = Entry(e_frame_0,width=20)
+    e_study_code_box.grid(row=1,column=1,pady=(10,0))
+    e_language_number = Label(e_frame_0, text="Language number")
+    e_language_number.grid(row=2,column=0,pady=(10,0))
+    e_language_number_box = Entry(e_frame_0,width=20)
+    e_language_number_box.grid(row=2,column=1,pady=(10,0))
+    e_pm_name = Label(e_frame_0, text="Project Manager")
+    e_pm_name.grid(row=3,column=0,pady=(10,0))
+    e_pm_name_box = Entry(e_frame_0, width=20)
+    e_pm_name_box.grid(row=3,column=1, pady=(10,0))
+    e_pds_name = Label(e_frame_0, text="Project Delivery Specialist")
+    e_pds_name.grid(row=4,column=0,pady=(10,0))
+    e_pds_name_box = Entry(e_frame_0, width=20)
+    e_pds_name_box.grid(row=4,column=1, pady=(10,0))
+    e_device_type = Label(e_frame_0,text="Device")
+    e_device_type.grid(row=5,column=0,pady=(10,0))
+    e_device_type_box=Entry(e_frame_0,width=20)
+    e_device_type_box.grid(row=5,column=1,pady=(10,0))
+
+
+    """Awardeded Study frame"""
+    #LABELS
+    e_awarded_study = Label(e_frame_1,text='Awarded Study',font='Arial 9 bold')
+    e_internal_kom =Label(e_frame_1,text='Internal KOM')
+    e_check_wf = Label(e_frame_1, text="Check WF plan")
+    e_sls_task = Label(e_frame_1, text="Assign SLS in WF")
+    e_draft_lp = Label(e_frame_1, text="Draft loc. plan")
+
+    #variables for checkboxex
+    e_internal_kom_var = IntVar()
+    e_check_wf_var = IntVar()
+    e_sls_task_var = IntVar()
+    e_draft_lp_var = IntVar()
+
+    #CHECKBOXES
+    """Awardeded Study frame checkboxes"""
+    e_internal_kom_cb = Checkbutton(e_frame_1, variable=e_internal_kom_var)
+    e_check_wf_cb = Checkbutton(e_frame_1, variable=e_check_wf_var)
+    e_sls_task_cb = Checkbutton(e_frame_1, variable=e_sls_task_var)
+    e_draft_lp_cb = Checkbutton(e_frame_1, variable=e_draft_lp_var)
+
+    #grid
+    e_awarded_study.grid(row=0,column=0, columnspan=2, pady=10)
+    e_internal_kom.grid(row=1,column=0)
+    e_check_wf.grid(row=2,column=0)
+    e_sls_task.grid(row=3,column=0,)
+    e_draft_lp.grid(row=4,column=0)
+    e_internal_kom_cb.grid(row=1,column=1)
+    e_check_wf_cb.grid(row=2,column=1,)
+    e_sls_task_cb.grid(row=3,column=1)
+    e_draft_lp_cb.grid(row=4,column=1)
+
+    """Localisation setup frame"""
+
+    #labels
+    e_loca_setup = Label(e_frame_2, text='Localisation setup',font='Arial 9 bold')
+    e_loca_kom = Label(e_frame_2, text='Localisation KOM date')
+    e_check_msr = Label(e_frame_2,text='Check Master SR')
+    e_check_mqrg = Label(e_frame_2,text='Check Master QRG/SUM')
+    e_check_ldc = Label(e_frame_2, text='Check master LDC is done')
+    e_check_paper_source = Label(e_frame_2, text="Check paper sources")
+    e_check_translation_service = Label(e_frame_2,text="Confirm translation services")
+    e_check_tft = Label(e_frame_2, text="Check if TFT is split per services/forms")
+    e_check_irb = Label(e_frame_2, text="Confirm IRB")
+    e_check_quote = Label(e_frame_2, text="Create quotation requests")
+    e_check_po = Label(e_frame_2, text="Create PO")
+    e_add_quote_po_oct = Label(e_frame_2, text="Add quote and PO in OCT")
+    e_loca_plan = Label(e_frame_2, text="Create final localisation plan")
+    e_access_ts_tm = Label(e_frame_2, text="Get access in TS and TM")
+    e_assign_ls_wf = Label(e_frame_2,text="Assign LS in WF")
+    e_access_platform = Label(e_frame_2,text="Get access in vendor platform(if needed)")
+    #global variables
+
+
+
+    #variables for localisation setup frame checkboxes
+    e_loca_kom_var = IntVar()
+    e_check_msr_var = IntVar()
+    e_check_mqrg_var = IntVar()
+    e_check_ldc_var = IntVar()
+    e_check_paper_source_var = IntVar()
+    e_check_translation_service_var = IntVar()
+    e_check_tft_var = IntVar()
+    e_check_irb_var = IntVar()
+    e_check_quote_var = IntVar()
+    e_check_po_var = IntVar()
+    e_add_quote_po_oct_var = IntVar()
+    e_loca_plan_var = IntVar()
+    e_access_ts_tm_var = IntVar()
+    e_assign_ls_wf_var = IntVar()
+    e_access_platform_var = IntVar()
+
+    #checkboxes for localisation setup
+    e_loca_kom_cb = Checkbutton(e_frame_2, variable=e_loca_kom_var)
+    e_check_msr_cb = Checkbutton(e_frame_2, variable=e_check_msr_var)
+    e_check_mqrg_cb = Checkbutton(e_frame_2, variable=e_check_mqrg_var)
+    e_check_ldc_cb = Checkbutton(e_frame_2, variable=e_check_ldc_var)
+    e_check_paper_source_cb = Checkbutton(e_frame_2, variable=e_check_paper_source_var)
+    e_check_translation_service_cb = Checkbutton(e_frame_2, variable=e_check_translation_service_var)
+    e_check_tft_cb = Checkbutton(e_frame_2, variable=e_check_tft_var)
+    e_check_irb_cb = Checkbutton(e_frame_2, variable=e_check_irb_var)
+    e_check_quote_cb = Checkbutton(e_frame_2, variable=e_check_quote_var)
+    e_check_po_cb = Checkbutton(e_frame_2, variable=e_check_po_var)
+    e_add_quote_po_oct_cb = Checkbutton(e_frame_2, variable=e_add_quote_po_oct_var)
+    e_loca_plan_cb = Checkbutton(e_frame_2, variable=e_loca_plan_var)
+    e_access_ts_tm_cb = Checkbutton(e_frame_2, variable=e_access_ts_tm_var)
+    e_assign_ls_wf_cb = Checkbutton(e_frame_2, variable=e_assign_ls_wf_var)
+    e_access_platform_cb=Checkbutton(e_frame_2, variable=e_access_platform_var)
+
+    #grid for localisation setup
+    e_loca_setup.grid(row=0,column=0, columnspan=3,padx=70,pady=10)
+    e_loca_kom.grid(row=2,column=0)
+    e_check_msr.grid(row=3,column=0)
+    e_check_mqrg.grid(row=4,column=0)
+    e_check_ldc.grid(row=5,column=0)
+    e_check_paper_source.grid(row=6,column=0)
+    e_check_translation_service.grid(row=7,column=0)
+    e_check_tft.grid(row=8,column=0)
+    e_check_irb.grid(row=2,column=2)
+    e_check_quote.grid(row=3,column=2)
+    e_check_po.grid(row=4,column=2)
+    e_add_quote_po_oct.grid(row=5,column=2)
+    e_loca_plan.grid(row=6,column=2)
+    e_access_ts_tm.grid(row=7,column=2)
+    e_assign_ls_wf.grid(row=8,column=2)
+    e_access_platform.grid(row=9,column=2)
+    e_loca_kom_cb.grid(row=2,column=1)
+    e_check_msr_cb.grid(row=3,column=1)
+    e_check_mqrg_cb.grid(row=4,column=1)
+    e_check_ldc_cb.grid(row=5,column=1)
+    e_check_paper_source_cb.grid(row=6,column=1)
+    e_check_translation_service_cb.grid(row=7,column=1)
+    e_check_tft_cb.grid(row=8,column=1)
+    e_check_irb_cb.grid(row=2,column=3)
+    e_check_quote_cb.grid(row=3,column=3)
+    e_check_po_cb.grid(row=4,column=3)
+    e_add_quote_po_oct_cb.grid(row=5,column=3)
+    e_loca_plan_cb.grid(row=6,column=3)
+    e_access_ts_tm_cb.grid(row=7,column=3)
+    e_assign_ls_wf_cb.grid(row=8,column=3)
+    e_access_platform_cb.grid(row=9,column=3)
+
+    """Implementation frame"""
+    e_implementation = Label(e_frame_3, text="Implementation",font='Arial 9 bold')
+    e_handover_ls = Label(e_frame_3, text="Handover info to LS")
+    e_notes = Label(e_frame_3, text="NOTES",font='Arial 9 bold')
+    e_notes_text= Text(e_frame_3, width=40,height=10)
+
+    e_handover_ls_var=IntVar()
+    e_handover_ls_cb =Checkbutton(e_frame_3, variable=e_handover_ls_var)
+
+    #grid
+    e_implementation.grid(row=0,column=0, columnspan=2, pady=10)
+    e_handover_ls.grid(row=1,column=0)
+    e_handover_ls_cb.grid(row=1,column=1)
+    e_notes.grid(row=2,column=0,columnspan=2)
+    e_notes_text.grid(row=3,column=0,columnspan=2,padx=10,pady=5)
+
+
+    #TO DO Frame
+
+    e_to_do = Label(e_frame_4,text="TO DO",font='Arial 10 bold')
+    e_to_do_textbox = Text(e_frame_4,width=30,height=14,bd=3)
+
+    #grid
+    e_to_do.grid(row=0,column=1)
+    e_to_do_textbox.grid(row=1,column=0,columnspan=3,padx=5,pady=5,ipadx=10,ipady=10)
+
+    e_checklist.mainloop()
+
+e_frames()
 #frames()
 conn.commit()
 conn.close()
