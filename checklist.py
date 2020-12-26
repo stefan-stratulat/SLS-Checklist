@@ -8,7 +8,8 @@ c = conn.cursor()
 def frames():
     checklist = Tk()
     checklist.title("SLS Checklist")
-    checklist.geometry('1080x600')
+    checklist.configure(bg="#add8e6")
+    checklist.geometry('1000x650')
 
     #Checklist FRAMES
     frame_0 = LabelFrame(checklist) #Study info frame
@@ -16,7 +17,6 @@ def frames():
     frame_2 = LabelFrame(checklist) #Localisation setup frame
     frame_3 = LabelFrame(checklist) #Implementation frame
     frame_4 = LabelFrame(checklist)  #TO DO Frame
-
 
     #function for the submit button
     def submit():
@@ -84,7 +84,6 @@ def frames():
         conn.close()
         checklist.destroy()
 
-
     #Add Study
     add_study = Button(checklist, text="Add study",command=submit, padx=5,pady=5)
     #Update study
@@ -128,7 +127,7 @@ def frames():
 
     """Awardeded Study frame"""
     #LABELS
-    awarded_study = Label(frame_1,text='Awarded Study')
+    awarded_study = Label(frame_1,text='Awarded Study',font='Arial 9 bold')
     internal_kom =Label(frame_1,text='Internal KOM')
     check_wf = Label(frame_1, text="Check WF plan")
     sls_task = Label(frame_1, text="Assign SLS in WF")
@@ -161,7 +160,7 @@ def frames():
     """Localisation setup frame"""
 
     #labels
-    loca_setup = Label(frame_2, text='Localisation setup')
+    loca_setup = Label(frame_2, text='Localisation setup',font='Arial 9 bold')
     loca_kom = Label(frame_2, text='Localisation KOM date')
     check_msr = Label(frame_2,text='Check Master SR')
     check_mqrg = Label(frame_2,text='Check Master QRG/SUM')
@@ -249,9 +248,9 @@ def frames():
     access_platform_cb.grid(row=9,column=3)
 
     """Implementation frame"""
-    implementation = Label(frame_3, text="Implementation")
+    implementation = Label(frame_3, text="Implementation",font='Arial 9 bold')
     handover_ls = Label(frame_3, text="Handover info to LS")
-    notes = Label(frame_3, text="NOTES")
+    notes = Label(frame_3, text="NOTES",font='Arial 9 bold')
     notes_text= Text(frame_3, width=40,height=10)
 
     handover_ls_var=IntVar()
@@ -267,12 +266,12 @@ def frames():
 
     #TO DO Frame
 
-    to_do = Label(frame_4,text="TO DO")
-    to_do_textbox = Text(frame_4,width=30,height=15,bd=2)
+    to_do = Label(frame_4,text="TO DO",font='Arial 10 bold')
+    to_do_textbox = Text(frame_4,width=30,height=14,bd=3)
 
     #grid
     to_do.grid(row=0,column=1)
-    to_do_textbox.grid(row=1,column=0,columnspan=4,padx=5,pady=5,ipadx=10)
+    to_do_textbox.grid(row=1,column=0,columnspan=3,padx=5,pady=5,ipadx=10,ipady=10)
 
     checklist.mainloop()
 
