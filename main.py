@@ -1,29 +1,29 @@
 from tkinter import *
+import sqlite3
+from PIL import ImageTk, Image
 from checklist import frames
+
+
 root = Tk()
 root.title("SLS Checklist")
+root.iconbitmap('images/fire_eye_alien.ico')
+root.configure(bg="#add8e6")
+root.geometry('250x300')
 
 
-#Main frame Widget
-main_frame = LabelFrame(root, padx=30,pady=30)
-main_frame.pack(padx=20,pady=20)
 
-#function to open a new window for checklist
+"""Button to add a new study, will open the frames function from checklist module"""
+add_study = Button(root, text="Add new study", command= frames,padx=10, pady=10)
 
+#Search label that will search on the database for the study code.
+search_label = Label(root, text="Search study code",bg="#add8e6")
+search_box = Entry(root,width=30)
 
-add_study = Button(main_frame, text="Add new study", padx =10,
-    pady=10,command= frames)
-check_studies = Button(main_frame, text="Check studies",padx=10,
-    pady=10,)
+#Grid
+add_study.grid(row=0,column=0,columnspan=2,padx=10,pady=10,ipadx=50)
+search_label.grid(row=1,column=0)
+search_box.grid(row=2,column=0, pady=10,ipady=10)
 
-#main frame Grid
-add_study.grid(row=0,column=0, padx=10, pady=10)
-check_studies.grid(row=0,column=1, padx=10, pady=10)
-
-#Study Frame Widget
-
-study_frame = LabelFrame(root, text="Studies",padx=20,pady=20)
-study_frame.pack()
 
 
 root.mainloop()

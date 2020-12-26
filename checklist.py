@@ -1,5 +1,7 @@
 from tkinter import *
+from PIL import ImageTk, Image
 import sqlite3
+
 
 conn = sqlite3.connect('studies.db')
 c = conn.cursor()
@@ -8,6 +10,7 @@ c = conn.cursor()
 def frames():
     checklist = Tk()
     checklist.title("SLS Checklist")
+    checklist.iconbitmap('images/fire_eye_alien.ico')
     checklist.configure(bg="#add8e6")
     checklist.geometry('1000x650')
 
@@ -276,6 +279,6 @@ def frames():
     checklist.mainloop()
 
 
-frames()
+#frames()
 conn.commit()
 conn.close()
