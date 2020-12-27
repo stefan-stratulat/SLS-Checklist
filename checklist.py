@@ -12,7 +12,7 @@ def frames():
     checklist.title("SLS Checklist")
     checklist.iconbitmap('images/fire_eye_alien.ico')
     checklist.configure(bg="#add8e6")
-    checklist.geometry('1000x650')
+    checklist.geometry('1200x650')
 
     #Checklist FRAMES
     frame_0 = LabelFrame(checklist) #Study info frame
@@ -32,6 +32,7 @@ def frames():
                 :pm_name,
                 :pds_name,
                 :device_type,
+                :cis,
                 :internal_kom,
                 :check_wf,
                 :sls_task,
@@ -60,26 +61,27 @@ def frames():
                 "pm_name": pm_name_box.get(),
                 "pds_name": pds_name_box.get(),
                 "device_type": device_type_box.get(),
-                "internal_kom": internal_kom_var.get(),
-                "check_wf": check_wf_var.get(),
-                "sls_task": sls_task_var.get(),
-                "draft_lp": draft_lp_var.get(),
-                "loca_kom": loca_kom_var.get(),
-                "check_msr": check_msr_var.get(),
-                "check_mqrg": check_mqrg_var.get(),
-                "check_ldc": check_ldc_var.get(),
-                "check_paper_source": check_paper_source_var.get(),
-                "check_translation_service": check_translation_service_var.get(),
-                "check_tft": check_tft_var.get(),
-                "check_irb": check_irb_var.get(),
-                "check_quote": check_quote_var.get(),
-                "check_po": check_po_var.get(),
-                "add_quote_po_oct": add_quote_po_oct_var.get(),
-                "loca_plan": loca_plan_var.get(),
-                "access_ts_tm": access_ts_tm_var.get(),
-                "assign_ls_wf": assign_ls_wf_var.get(),
-                "access_platform": access_platform_var.get(),
-                "handover_ls": handover_ls_var.get(),
+                "cis": cis_box.get(),
+                "internal_kom": internal_kom_box.get(),
+                "check_wf": check_wf_box.get(),
+                "sls_task": sls_task_box.get(),
+                "draft_lp": draft_lp_box.get(),
+                "loca_kom": loca_kom_box.get(),
+                "check_msr": check_msr_box.get(),
+                "check_mqrg": check_mqrg_box.get(),
+                "check_ldc": check_ldc_box.get(),
+                "check_paper_source": check_paper_source_box.get(),
+                "check_translation_service": check_translation_service_box.get(),
+                "check_tft": check_tft_box.get(),
+                "check_irb": check_irb_box.get(),
+                "check_quote": check_quote_box.get(),
+                "check_po": check_po_box.get(),
+                "add_quote_po_oct": add_quote_po_oct_box.get(),
+                "loca_plan": loca_plan_box.get(),
+                "access_ts_tm": access_ts_tm_box.get(),
+                "assign_ls_wf": assign_ls_wf_box.get(),
+                "access_platform": access_platform_box.get(),
+                "handover_ls": handover_ls_box.get(),
                 "notes": notes_text.get(1.0,END),
                 "to_do": to_do_textbox.get(1.0,END)
                 })
@@ -126,7 +128,10 @@ def frames():
     device_type.grid(row=5,column=0,pady=(10,0))
     device_type_box=Entry(frame_0,width=20)
     device_type_box.grid(row=5,column=1,pady=(10,0))
-
+    cis_label = Label(frame_0,text="CIS")
+    cis_label.grid(row=6,column=0,pady=(10,0))
+    cis_box= Entry(frame_0,width=20)
+    cis_box.grid(row=6,column=1,pady=(10,0))
 
     """Awardeded Study frame"""
     #LABELS
@@ -136,29 +141,21 @@ def frames():
     sls_task = Label(frame_1, text="Assign SLS in WF")
     draft_lp = Label(frame_1, text="Draft loc. plan")
 
-    #variables for checkboxex
-    internal_kom_var = IntVar()
-    check_wf_var = IntVar()
-    sls_task_var = IntVar()
-    draft_lp_var = IntVar()
+    internal_kom_box = Entry(frame_1,width=10)
+    check_wf_box = Entry(frame_1,width=10)
+    sls_task_box = Entry(frame_1,width=10)
+    draft_lp_box = Entry(frame_1,width=10)
 
-    #CHECKBOXES
-    """Awardeded Study frame checkboxes"""
-    internal_kom_cb = Checkbutton(frame_1, variable=internal_kom_var)
-    check_wf_cb = Checkbutton(frame_1, variable=check_wf_var)
-    sls_task_cb = Checkbutton(frame_1, variable=sls_task_var)
-    draft_lp_cb = Checkbutton(frame_1, variable=draft_lp_var)
-
-    #grid
+    """Grid for Awarded study frame - frame_1"""
     awarded_study.grid(row=0,column=0, columnspan=2, pady=10)
     internal_kom.grid(row=1,column=0)
     check_wf.grid(row=2,column=0)
     sls_task.grid(row=3,column=0,)
     draft_lp.grid(row=4,column=0)
-    internal_kom_cb.grid(row=1,column=1)
-    check_wf_cb.grid(row=2,column=1,)
-    sls_task_cb.grid(row=3,column=1)
-    draft_lp_cb.grid(row=4,column=1)
+    internal_kom_box.grid(row=1,column=1)
+    check_wf_box.grid(row=2,column=1,)
+    sls_task_box.grid(row=3,column=1)
+    draft_lp_box.grid(row=4,column=1)
 
     """Localisation setup frame"""
 
@@ -179,43 +176,23 @@ def frames():
     access_ts_tm = Label(frame_2, text="Get access in TS and TM")
     assign_ls_wf = Label(frame_2,text="Assign LS in WF")
     access_platform = Label(frame_2,text="Get access in vendor platform(if needed)")
-    #global variables
 
-
-
-    #variables for localisation setup frame checkboxes
-    loca_kom_var = IntVar()
-    check_msr_var = IntVar()
-    check_mqrg_var = IntVar()
-    check_ldc_var = IntVar()
-    check_paper_source_var = IntVar()
-    check_translation_service_var = IntVar()
-    check_tft_var = IntVar()
-    check_irb_var = IntVar()
-    check_quote_var = IntVar()
-    check_po_var = IntVar()
-    add_quote_po_oct_var = IntVar()
-    loca_plan_var = IntVar()
-    access_ts_tm_var = IntVar()
-    assign_ls_wf_var = IntVar()
-    access_platform_var = IntVar()
-
-    #checkboxes for localisation setup
-    loca_kom_cb = Checkbutton(frame_2, variable=loca_kom_var)
-    check_msr_cb = Checkbutton(frame_2, variable=check_msr_var)
-    check_mqrg_cb = Checkbutton(frame_2, variable=check_mqrg_var)
-    check_ldc_cb = Checkbutton(frame_2, variable=check_ldc_var)
-    check_paper_source_cb = Checkbutton(frame_2, variable=check_paper_source_var)
-    check_translation_service_cb = Checkbutton(frame_2, variable=check_translation_service_var)
-    check_tft_cb = Checkbutton(frame_2, variable=check_tft_var)
-    check_irb_cb = Checkbutton(frame_2, variable=check_irb_var)
-    check_quote_cb = Checkbutton(frame_2, variable=check_quote_var)
-    check_po_cb = Checkbutton(frame_2, variable=check_po_var)
-    add_quote_po_oct_cb = Checkbutton(frame_2, variable=add_quote_po_oct_var)
-    loca_plan_cb = Checkbutton(frame_2, variable=loca_plan_var)
-    access_ts_tm_cb = Checkbutton(frame_2, variable=access_ts_tm_var)
-    assign_ls_wf_cb = Checkbutton(frame_2, variable=assign_ls_wf_var)
-    access_platform_cb=Checkbutton(frame_2, variable=access_platform_var)
+    #boxex for localisation setup
+    loca_kom_box = Entry(frame_2,width=10)
+    check_msr_box = Entry(frame_2,width=10)
+    check_mqrg_box = Entry(frame_2,width=10)
+    check_ldc_box = Entry(frame_2,width=10)
+    check_paper_source_box = Entry(frame_2,width=10)
+    check_translation_service_box = Entry(frame_2,width=10)
+    check_tft_box = Entry(frame_2,width=10)
+    check_irb_box = Entry(frame_2,width=10)
+    check_quote_box = Entry(frame_2,width=10)
+    check_po_box = Entry(frame_2,width=10)
+    add_quote_po_oct_box = Entry(frame_2,width=10)
+    loca_plan_box = Entry(frame_2,width=10)
+    access_ts_tm_box = Entry(frame_2,width=10)
+    assign_ls_wf_box = Entry(frame_2,width=10)
+    access_platform_box= Entry(frame_2,width=10)
 
     #grid for localisation setup
     loca_setup.grid(row=0,column=0, columnspan=3,padx=70,pady=10)
@@ -234,21 +211,21 @@ def frames():
     access_ts_tm.grid(row=7,column=2)
     assign_ls_wf.grid(row=8,column=2)
     access_platform.grid(row=9,column=2)
-    loca_kom_cb.grid(row=2,column=1)
-    check_msr_cb.grid(row=3,column=1)
-    check_mqrg_cb.grid(row=4,column=1)
-    check_ldc_cb.grid(row=5,column=1)
-    check_paper_source_cb.grid(row=6,column=1)
-    check_translation_service_cb.grid(row=7,column=1)
-    check_tft_cb.grid(row=8,column=1)
-    check_irb_cb.grid(row=2,column=3)
-    check_quote_cb.grid(row=3,column=3)
-    check_po_cb.grid(row=4,column=3)
-    add_quote_po_oct_cb.grid(row=5,column=3)
-    loca_plan_cb.grid(row=6,column=3)
-    access_ts_tm_cb.grid(row=7,column=3)
-    assign_ls_wf_cb.grid(row=8,column=3)
-    access_platform_cb.grid(row=9,column=3)
+    loca_kom_box.grid(row=2,column=1)
+    check_msr_box.grid(row=3,column=1)
+    check_mqrg_box.grid(row=4,column=1)
+    check_ldc_box.grid(row=5,column=1)
+    check_paper_source_box.grid(row=6,column=1)
+    check_translation_service_box.grid(row=7,column=1)
+    check_tft_box.grid(row=8,column=1)
+    check_irb_box.grid(row=2,column=3)
+    check_quote_box.grid(row=3,column=3)
+    check_po_box.grid(row=4,column=3)
+    add_quote_po_oct_box.grid(row=5,column=3)
+    loca_plan_box.grid(row=6,column=3)
+    access_ts_tm_box.grid(row=7,column=3)
+    assign_ls_wf_box.grid(row=8,column=3)
+    access_platform_box.grid(row=9,column=3)
 
     """Implementation frame"""
     implementation = Label(frame_3, text="Implementation",font='Arial 9 bold')
@@ -256,13 +233,13 @@ def frames():
     notes = Label(frame_3, text="NOTES",font='Arial 9 bold')
     notes_text= Text(frame_3, width=40,height=10)
 
-    handover_ls_var=IntVar()
-    handover_ls_cb =Checkbutton(frame_3, variable=handover_ls_var)
+
+    handover_ls_box =Entry(frame_3,width=10)
 
     #grid
     implementation.grid(row=0,column=0, columnspan=2, pady=10)
     handover_ls.grid(row=1,column=0)
-    handover_ls_cb.grid(row=1,column=1)
+    handover_ls_box.grid(row=1,column=1)
     notes.grid(row=2,column=0,columnspan=2)
     notes_text.grid(row=3,column=0,columnspan=2,padx=10,pady=5)
 
@@ -278,6 +255,7 @@ def frames():
 
     checklist.mainloop()
 
+frames()
 
 conn.commit()
 conn.close()
