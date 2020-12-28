@@ -607,13 +607,17 @@ def update_info():
     conn.commit()
     conn.close()
 
+def delete():
+    return
 
 """Button to add a new study, will open the frames function from checklist module"""
-add_study = Button(root, text="Add new study", command=frames, padx=10, pady=5)
+add_study_btn = Button(root, text="Add new study", command=frames, padx=10, pady=5)
 """Button to show the studies in the DB, by OID and Study code"""
-show_studies = Button(root, text="Show studies",command=show,padx=10, pady=5)
+show_studies_btn = Button(root, text="Show studies",command=show,padx=10, pady=5)
 """Button to open the checklist with the data from the DB, based on the record added in the search box"""
-update_study = Button(root, text="Update study",command=editor,padx=10, pady=5)
+update_study_btn = Button(root, text="Update study",command=editor,padx=10, pady=5)
+"""Button to delete the selected study from the DB"""
+delete_study_btn = Button(root, text="Delete study", command=delete,padx=10,pady=5)
 
 #Search label that will search on the database for the study code.
 search_label = Label(root, text="Study ID",bg="#add8e6")
@@ -621,12 +625,12 @@ search_label = Label(root, text="Study ID",bg="#add8e6")
 search_box = Entry(root,width=35)
 
 #Grid
-add_study.grid(row=0,column=0,columnspan=2,padx=10,pady=10,ipadx=50)
+add_study_btn.grid(row=0,column=0,columnspan=2,padx=10,pady=10,ipadx=50)
 search_label.grid(row=1,column=0)
 search_box.grid(row=2,column=0, padx=10,pady=(0,10))
-show_studies.grid(row=0,column=3,columnspan=2,padx=10,pady=5,ipadx=50)
-update_study.grid(row=4,column=0,columnspan=2,padx=10,pady=5,ipadx=50)
+show_studies_btn.grid(row=0,column=3,columnspan=2,padx=10,pady=5,ipadx=50)
+update_study_btn.grid(row=4,column=0,columnspan=2,padx=10,pady=5,ipadx=50)
+delete_study_btn.grid(row=5,column=0,columnspan=2,padx=10,pady=5,ipadx=50)
 
 
 root.mainloop()
-
