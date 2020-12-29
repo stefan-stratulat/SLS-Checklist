@@ -1,6 +1,7 @@
 from tkinter import *
 import sqlite3
 from PIL import ImageTk, Image
+from tkinter import messagebox
 
 
 root = Tk()
@@ -607,8 +608,26 @@ def update_info():
     conn.commit()
     conn.close()
 
+
 def delete():
-    return
+    conn = sqlite3.connect('studies.db')
+    c = conn.cursor()
+    record_id = search_box.get()
+    #Query the database for study code
+    c.execute("SELECT study_code FROM studies WHERE oid= "+record_id)
+    queried_study = c.fetchone()
+    #ask user to confirm the study code they want to delete
+    message = messagebox.askquestion(title="Delete",message=f"Are you sure you want to delete record {record_id}, study code{queried_study}?")
+    if message =='yes':
+        #delete the record from DB after user press yes
+        c.execute("DELETE from studies WHERE oid= "+record_id)
+    else:
+        return
+
+    conn.commit()
+    conn.close()
+    #clear the search box
+    search_box.delete(0, END)
 
 """Button to add a new study, will open the frames function from checklist module"""
 add_study_btn = Button(root, text="Add new study", command=frames, padx=10, pady=5)
