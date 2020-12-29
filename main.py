@@ -629,6 +629,40 @@ def delete():
     #clear the search box
     search_box.delete(0, END)
 
+def to_do_report():
+    conn = sqlite3.connect('studies.db')
+    c = conn.cursor()
+
+    """create a new window that will show the report"""
+    report = Tk()
+    report.title("To Do Report")
+    report.iconbitmap('images/fire_eye_alien.ico')
+    report.configure(bg="#add8e6")
+    report.geometry('300x400')
+
+    c.execute("SELECT study_code,to_do FROM studies")
+    records = c.fetchall()
+
+    print_records_report = ''
+    for record in records:
+        print_records_report += "Study Code: "+str(record[0])+"\n"+str(record[1]) +"\n"
+
+    #widgets
+    #study_code_label_report = Label(report, text="Study Code")
+    #to_do_label_report = Label(report, text="To Do")
+    close_report_btn = Button(report,text="Close",command=report.destroy, padx=10, pady=10)
+    query_label_report = Label(report, text=print_records_report,bg="#add8e6")
+
+    #grid
+    #study_code_label_report.grid(row=1,column=0,pady=(10,0))
+    #to_do_label_report.grid(row=1,column=1,pady=(10,0))
+    close_report_btn.grid(row=0,column=0,columnspan=2,padx=5,pady=5,ipadx=50)
+    query_label_report.grid(row=1, column=0, columnspan=2,rowspan=30)
+
+    conn.commit()
+    conn.close()
+
+
 """Button to add a new study, will open the frames function from checklist module"""
 add_study_btn = Button(root, text="Add new study", command=frames, padx=10, pady=5)
 """Button to show the studies in the DB, by OID and Study code"""
@@ -637,11 +671,13 @@ show_studies_btn = Button(root, text="Show studies",command=show,padx=10, pady=5
 update_study_btn = Button(root, text="Update study",command=editor,padx=10, pady=5)
 """Button to delete the selected study from the DB"""
 delete_study_btn = Button(root, text="Delete study", command=delete,padx=10,pady=5)
+"""Button for an TO DO report"""
+to_do_report_btn = Button(root,text="[TO DO]Report", command=to_do_report,padx=10,pady=5)
 
 #Search label that will search on the database for the study code.
 search_label = Label(root, text="Study ID",bg="#add8e6")
 """Box used to update the study, search by the OID"""
-search_box = Entry(root,width=35)
+search_box = Entry(root,width=32)
 
 #Grid
 add_study_btn.grid(row=0,column=0,columnspan=2,padx=10,pady=10,ipadx=50)
@@ -649,7 +685,8 @@ search_label.grid(row=1,column=0)
 search_box.grid(row=2,column=0, padx=10,pady=(0,10))
 show_studies_btn.grid(row=0,column=3,columnspan=2,padx=10,pady=5,ipadx=50)
 update_study_btn.grid(row=4,column=0,columnspan=2,padx=10,pady=5,ipadx=50)
-delete_study_btn.grid(row=5,column=0,columnspan=2,padx=10,pady=5,ipadx=50)
+delete_study_btn.grid(row=5,column=0,columnspan=2,padx=10,pady=5,ipadx=52)
+to_do_report_btn.grid(row=6,column=0,columnspan=2,padx=10,pady=5,ipadx=45)
 
 
 root.mainloop()
