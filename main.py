@@ -274,7 +274,7 @@ def show():
         print_records += str(record[0])+ " "+str(record[2]) +"\n"
 
     query_label = Label(root, text=print_records,bg="#add8e6")
-    query_label.grid(row=2, column=3, columnspan=2,rowspan=30)
+    query_label.grid(row=1, column=3, columnspan=2,rowspan=30)
 
     conn.commit()
     conn.close()
@@ -492,6 +492,8 @@ def editor():
     e_to_do.grid(row=0,column=1)
     e_to_do_textbox.grid(row=1,column=0,columnspan=3,padx=5,pady=5,ipadx=10,ipady=10)
 
+
+
     #coonect to the database
     conn = sqlite3.connect('studies.db')
     c =  conn.cursor()
@@ -608,7 +610,6 @@ def update_info():
     conn.commit()
     conn.close()
 
-
 def delete():
     conn = sqlite3.connect('studies.db')
     c = conn.cursor()
@@ -662,7 +663,8 @@ def to_do_report():
     conn.commit()
     conn.close()
 
-
+def handover_report():
+    return
 """Button to add a new study, will open the frames function from checklist module"""
 add_study_btn = Button(root, text="Add new study", command=frames, padx=10, pady=5)
 """Button to show the studies in the DB, by OID and Study code"""
@@ -673,6 +675,8 @@ update_study_btn = Button(root, text="Update study",command=editor,padx=10, pady
 delete_study_btn = Button(root, text="Delete study", command=delete,padx=10,pady=5)
 """Button for an TO DO report"""
 to_do_report_btn = Button(root,text="[TO DO]Report", command=to_do_report,padx=10,pady=5)
+"""Button for Handover report"""
+handover_report_btn = Button(root,text="Handover Report", command=handover_report,padx=10,pady=5)
 
 #Search label that will search on the database for the study code.
 search_label = Label(root, text="Study ID",bg="#add8e6")
@@ -687,6 +691,7 @@ show_studies_btn.grid(row=0,column=3,columnspan=2,padx=10,pady=5,ipadx=50)
 update_study_btn.grid(row=4,column=0,columnspan=2,padx=10,pady=5,ipadx=50)
 delete_study_btn.grid(row=5,column=0,columnspan=2,padx=10,pady=5,ipadx=52)
 to_do_report_btn.grid(row=6,column=0,columnspan=2,padx=10,pady=5,ipadx=45)
+handover_report_btn.grid(row=7,column=0,columnspan=2,padx=10,pady=5,ipadx=40)
 
 
 root.mainloop()
