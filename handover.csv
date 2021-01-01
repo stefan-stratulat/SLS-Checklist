@@ -1,0 +1,4 @@
+sponsor,study_code,language_number,pm_name,pds_name,device_type,cis,internal_kom,check_wf,sls_task,draft_lp,loca_kom,check_msr,check_mqrg,check_ldc,check_paper_source,check_translation_service,check_tft,check_irb,check_quote,check_po,add_quote_po_oct,loca_plan,access_ts_tm,assign_ls_wf,access_platform,handover_ls,notes,to_do,
+('Sponsor', 'A-1111-2222', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '\n', 'To do\n')
+('Sponsor', 'A-1111-2222', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '\n', 'To do\n')
+('Sponsor', 'A-1234-5842', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '\n', 'Check WF\nCheck PO\nAssing LS WF\n')

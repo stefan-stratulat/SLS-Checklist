@@ -36,15 +36,20 @@ c.execute("""CREATE TABLE IF NOT EXISTS studies(
         notes text,
         to_do text)""")
 
-def select():
-    conn = sqlite3.connect('studies.db')
-    c = conn.cursor()
-    c.execute("SELECT * FROM studies")
-    records = c.fetchall()
-    for r in records:
-        print(r)
+# def select():
+#     conn = sqlite3.connect('studies.db')
+#     c = conn.cursor()
+#     c.execute("SELECT * FROM studies")
+#     records = c.fetchall()
+#     for r in records:
+#         print(r)
 
-select()
+c.execute("SELECT * from studies")
+column_name = [row[0] for row in c.description]
+
+print(*column_name)
+
+#select()
 conn.commit()
 
 conn.close()

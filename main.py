@@ -274,7 +274,7 @@ def show():
         print_records += str(record[0])+ " "+str(record[2]) +"\n"
 
     query_label = Label(root, text=print_records,bg="#add8e6")
-    query_label.grid(row=1, column=3, columnspan=2,rowspan=30)
+    query_label.grid(row=1, column=3, columnspan=2,rowspan=30,sticky=N)
 
     conn.commit()
     conn.close()
@@ -649,14 +649,11 @@ def to_do_report():
         print_records_report += "Study Code: "+str(record[0])+"\n"+str(record[1]) +"\n"
 
     #widgets
-    #study_code_label_report = Label(report, text="Study Code")
-    #to_do_label_report = Label(report, text="To Do")
+
     close_report_btn = Button(report,text="Close",command=report.destroy, padx=10, pady=10)
     query_label_report = Label(report, text=print_records_report,bg="#add8e6")
 
     #grid
-    #study_code_label_report.grid(row=1,column=0,pady=(10,0))
-    #to_do_label_report.grid(row=1,column=1,pady=(10,0))
     close_report_btn.grid(row=0,column=0,columnspan=2,padx=5,pady=5,ipadx=50)
     query_label_report.grid(row=1, column=0, columnspan=2,rowspan=30)
 
@@ -664,7 +661,45 @@ def to_do_report():
     conn.close()
 
 def handover_report():
-    return
+    conn = sqlite3.connect('studies.db')
+    c = conn.cursor()
+    conn = sqlite3.connect('studies.db')
+    c = conn.cursor()
+
+    """create a new window that will show the report"""
+    # handover = Tk()
+    # handover.title("Handover")
+    # handover.iconbitmap('images/fire_eye_alien.ico')
+    # handover.configure(bg="#add8e6")
+    # handover.geometry('300x400')
+
+
+    c.execute("SELECT * FROM studies")
+    records = c.fetchall()
+    c.execute("SELECT * from studies")
+    column_name = [row[0] for row in c.description]
+    print_records_report = ''
+    handover_file = open('handover.csv','w+')
+
+    for column in column_name:
+        handover_file.write(column + ',')
+    handover_file.write('\n')
+    for record in records:
+            print_records_report += str(record) + "\n"
+            handover_file.write(print_records_report)
+
+
+    #widgets
+
+    # close_report_btn = Button(handover,text="Close",command=handover.destroy, padx=10, pady=10)
+    # query_label_report = Label(handover, text=print_records_report,bg="#add8e6")
+
+    # #grid
+    # close_report_btn.grid(row=0,column=0,columnspan=2,padx=5,pady=5,ipadx=50)
+    # query_label_report.grid(row=2, column=0, columnspan=2,rowspan=30)
+
+
+
 """Button to add a new study, will open the frames function from checklist module"""
 add_study_btn = Button(root, text="Add new study", command=frames, padx=10, pady=5)
 """Button to show the studies in the DB, by OID and Study code"""
