@@ -2,6 +2,7 @@ from tkinter import *
 import sqlite3
 from PIL import ImageTk, Image
 from tkinter import messagebox
+import os
 
 
 root = Tk()
@@ -288,6 +289,29 @@ def editor():
     e_checklist.configure(bg="#add8e6")
     e_checklist.geometry('1200x650')
 
+    """Function for the handover LS button, gather data from Awarded study frame"""
+    def handover_ls_report():
+        conn = sqlite3.connect('studies.db')
+        c = conn.cursor()
+        conn = sqlite3.connect('studies.db')
+        c = conn.cursor()
+
+        handover_ls_file = open('handover_ls.txt','w+')
+        """data that will be writen on the txt file"""
+        handover_ls_file.write('Sponsor: '+ e_sponsor_box.get()+'\n')
+        handover_ls_file.write('Study code: '+ e_study_code_box.get()+'\n')
+        handover_ls_file.write('Language number: '+ e_language_number_box.get()+'\n')
+        handover_ls_file.write('PM: '+ e_pm_name_box.get()+'\n')
+        handover_ls_file.write('PDS: '+ e_pds_name_box.get()+'\n')
+        handover_ls_file.write('Device: '+ e_device_type_box.get()+'\n')
+        handover_ls_file.write('Translation vendor: '+'\n')
+        handover_ls_file.write('CIS: '+ e_cis_box.get())
+        handover_ls_file.close()
+        """open the file in windows after it's written and closed by python"""
+        absolute_path = os.path.dirname(os.path.abspath(__file__))
+        file_path = absolute_path + '\handover_ls.txt'
+        os.startfile(file_path)
+
     #Checklist FRAMES
     e_frame_0 = LabelFrame(e_checklist) #Study info frame
     e_frame_1 = LabelFrame(e_checklist) #Awarded study frame
@@ -326,18 +350,19 @@ def editor():
     global e_notes_text
     global e_to_do_textbox
 
-    #Add Study
-    e_add_study = Button(e_checklist, text="Add study",state=DISABLED, padx=5,pady=5)
+
     #Update study
-    e_update_study = Button(e_checklist, text="Update study info",command=update_info,padx=5,pady=5)
+    e_update_study_btn = Button(e_checklist, text="Update study info",command=update_info,padx=5,pady=5)
+
+    handover_ls_report_btn = Button(e_checklist, text="Handover LS", command=handover_ls_report,padx=5,pady=5)
     #MAIN GRID
     e_frame_0.grid(row=0,column=0,columnspan=2,padx=10,pady=10,ipadx=10,ipady=5)
     e_frame_1.grid(row=0,column=2,columnspan=2,padx=10,pady=10)
     e_frame_2.grid(row=0,column=4,columnspan=3,padx=10,pady=10,ipadx=10,ipady=5)
     e_frame_3.grid(row=2,column=0,columnspan=3,padx=20,pady=10)
     e_frame_4.grid(row=2,column=4,columnspan=4,padx=10,pady=10)
-    e_add_study.grid(row=3,column=0)
-    e_update_study.grid(row=3,column=2)
+    e_update_study_btn.grid(row=3,column=0)
+    handover_ls_report_btn.grid(row=3,column=2)
 
 
     #Study info frame
@@ -535,6 +560,7 @@ def editor():
         e_notes_text.insert(1.0, record[27])
         e_to_do_textbox.insert(1.0, record[28])
 
+
     conn.commit()
     conn.close()
     e_checklist.mainloop()
@@ -610,6 +636,7 @@ def update_info():
     conn.commit()
     conn.close()
 
+"""function to delete a study"""
 def delete():
     conn = sqlite3.connect('studies.db')
     c = conn.cursor()
@@ -630,6 +657,7 @@ def delete():
     #clear the search box
     search_box.delete(0, END)
 
+"""function to show a new window with all to do tasks"""
 def to_do_report():
     conn = sqlite3.connect('studies.db')
     c = conn.cursor()
@@ -660,35 +688,36 @@ def to_do_report():
     conn.commit()
     conn.close()
 
-def handover_report():
+"""function to generate a handover report with data in DB in csv and open that file"""
+def handover_sls_report():
     conn = sqlite3.connect('studies.db')
     c = conn.cursor()
     conn = sqlite3.connect('studies.db')
     c = conn.cursor()
 
-    """create a new window that will show the report"""
-    # handover = Tk()
-    # handover.title("Handover")
-    # handover.iconbitmap('images/fire_eye_alien.ico')
-    # handover.configure(bg="#add8e6")
-    # handover.geometry('300x400')
-
-
+    #select all data from studies
     c.execute("SELECT * FROM studies")
     records = c.fetchall()
+    #select only the column names
     c.execute("SELECT * from studies")
     column_name = [row[0] for row in c.description]
     print_records_report = ''
+    #create and open the csv file and write it
     handover_file = open('handover.csv','w+')
 
+    #add the column names in the first row in the csv file
     for column in column_name:
         handover_file.write(column + ',')
+
     handover_file.write('\n')
+    #add all the data in the csv file
     for record in records:
             print_records_report += str(record) + "\n"
             handover_file.write(print_records_report)
-
-
+    handover_file.close()
+    absolute_path = os.path.dirname(os.path.abspath(__file__))
+    file_path = absolute_path + '\handover.csv'
+    os.startfile(file_path)
     #widgets
 
     # close_report_btn = Button(handover,text="Close",command=handover.destroy, padx=10, pady=10)
@@ -711,7 +740,7 @@ delete_study_btn = Button(root, text="Delete study", command=delete,padx=10,pady
 """Button for an TO DO report"""
 to_do_report_btn = Button(root,text="[TO DO]Report", command=to_do_report,padx=10,pady=5)
 """Button for Handover report"""
-handover_report_btn = Button(root,text="Handover Report", command=handover_report,padx=10,pady=5)
+handover_report_btn = Button(root,text="Handover Report", command=handover_sls_report,padx=10,pady=5)
 
 #Search label that will search on the database for the study code.
 search_label = Label(root, text="Study ID",bg="#add8e6")
