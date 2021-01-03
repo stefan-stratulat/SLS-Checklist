@@ -37,6 +37,7 @@ def frames():
                 :pm_name,
                 :pds_name,
                 :device_type,
+                :translation_vendor,
                 :cis,
                 :internal_kom,
                 :check_wf,
@@ -66,6 +67,7 @@ def frames():
                 "pm_name": pm_name_box.get(),
                 "pds_name": pds_name_box.get(),
                 "device_type": device_type_box.get(),
+                "translation_vendor": translation_vendor_box.get(),
                 "cis": cis_box.get(),
                 "internal_kom": internal_kom_box.get(),
                 "check_wf": check_wf_box.get(),
@@ -96,8 +98,7 @@ def frames():
 
     #Add Study
     add_study = Button(checklist, text="Add study",command=submit, padx=5,pady=5)
-    #Update study
-    update_study = Button(checklist, text="Update study info",padx=5,pady=5)
+
     #MAIN GRID
     frame_0.grid(row=0,column=0,columnspan=2,padx=10,pady=10,ipadx=10,ipady=5)
     frame_1.grid(row=0,column=2,columnspan=2,padx=10,pady=10)
@@ -105,7 +106,6 @@ def frames():
     frame_3.grid(row=2,column=0,columnspan=3,padx=20,pady=10)
     frame_4.grid(row=2,column=4,columnspan=4,padx=10,pady=10)
     add_study.grid(row=3,column=0)
-    update_study.grid(row=3,column=2)
 
 
     #Study info frame
@@ -133,10 +133,14 @@ def frames():
     device_type.grid(row=5,column=0,pady=(10,0))
     device_type_box=Entry(frame_0,width=20)
     device_type_box.grid(row=5,column=1,pady=(10,0))
+    translation_vendor = Label(frame_0, text="Translation vendor")
+    translation_vendor_box = Entry(frame_0, width=20)
+    translation_vendor.grid(row=6,column=0,pady=(10,0))
+    translation_vendor_box.grid(row=6,column=1,pady=(10,0))
     cis_label = Label(frame_0,text="CIS")
-    cis_label.grid(row=6,column=0,pady=(10,0))
+    cis_label.grid(row=7,column=0,pady=(10,0))
     cis_box= Entry(frame_0,width=20)
-    cis_box.grid(row=6,column=1,pady=(10,0))
+    cis_box.grid(row=7,column=1,pady=(10,0))
 
     """Awardeded Study frame"""
     #LABELS
@@ -304,7 +308,7 @@ def editor():
         handover_ls_file.write('PM: '+ e_pm_name_box.get()+'\n')
         handover_ls_file.write('PDS: '+ e_pds_name_box.get()+'\n')
         handover_ls_file.write('Device: '+ e_device_type_box.get()+'\n')
-        handover_ls_file.write('Translation vendor: '+'\n')
+        handover_ls_file.write('Translation vendor: '+ e_translation_vendor_box.get()+'\n')
         handover_ls_file.write('CIS: '+ e_cis_box.get())
         handover_ls_file.close()
         """open the file in windows after it's written and closed by python"""
@@ -326,6 +330,7 @@ def editor():
     global e_pm_name_box
     global e_pds_name_box
     global e_device_type_box
+    global e_translation_vendor_box
     global e_cis_box
     global e_internal_kom_box
     global e_check_wf_box
@@ -390,10 +395,14 @@ def editor():
     e_device_type.grid(row=5,column=0,pady=(10,0))
     e_device_type_box=Entry(e_frame_0,width=20)
     e_device_type_box.grid(row=5,column=1,pady=(10,0))
+    e_translation_vendor = Label(e_frame_0, text="Translation vendor")
+    e_translation_vendor_box = Entry(e_frame_0, width=20)
+    e_translation_vendor.grid(row=6,column=0,pady=(10,0))
+    e_translation_vendor_box.grid(row=6,column=1,pady=(10,0))
     e_cis_label = Label(e_frame_0,text="CIS")
-    e_cis_label.grid(row=6,column=0,pady=(10,0))
+    e_cis_label.grid(row=7,column=0,pady=(10,0))
     e_cis_box= Entry(e_frame_0,width=20)
-    e_cis_box.grid(row=6,column=1,pady=(10,0))
+    e_cis_box.grid(row=7,column=1,pady=(10,0))
 
 
     """Awardeded Study frame"""
@@ -536,29 +545,30 @@ def editor():
         e_pm_name_box.insert(0, record[3])
         e_pds_name_box.insert(0, record[4])
         e_device_type_box.insert(0, record[5])
-        e_cis_box.insert(0,record[6])
-        e_internal_kom_box.insert(0, record[7])
-        e_check_wf_box.insert(0, record[8])
-        e_sls_task_box.insert(0, record[9])
-        e_draft_lp_box.insert(0, record[10])
-        e_loca_kom_box.insert(0, record[11])
-        e_check_msr_box.insert(0, record[12])
-        e_check_mqrg_box.insert(0, record[13])
-        e_check_ldc_box.insert(0, record[14])
-        e_check_paper_source_box.insert(0, record[15])
-        e_check_translation_service_box.insert(0, record[16])
-        e_check_tft_box.insert(0, record[17])
-        e_check_irb_box.insert(0, record[18])
-        e_check_quote_box.insert(0, record[19])
-        e_check_po_box.insert(0, record[20])
-        e_add_quote_po_oct_box.insert(0, record[21])
-        e_loca_plan_box.insert(0, record[22])
-        e_access_ts_tm_box.insert(0, record[23])
-        e_assign_ls_wf_box.insert(0, record[24])
-        e_access_platform_box.insert(0, record[25])
-        e_handover_ls_box.insert(0, record[26])
-        e_notes_text.insert(1.0, record[27])
-        e_to_do_textbox.insert(1.0, record[28])
+        e_translation_vendor_box.insert(0,record[6])
+        e_cis_box.insert(0,record[7])
+        e_internal_kom_box.insert(0, record[8])
+        e_check_wf_box.insert(0, record[9])
+        e_sls_task_box.insert(0, record[10])
+        e_draft_lp_box.insert(0, record[11])
+        e_loca_kom_box.insert(0, record[12])
+        e_check_msr_box.insert(0, record[13])
+        e_check_mqrg_box.insert(0, record[14])
+        e_check_ldc_box.insert(0, record[15])
+        e_check_paper_source_box.insert(0, record[16])
+        e_check_translation_service_box.insert(0, record[17])
+        e_check_tft_box.insert(0, record[18])
+        e_check_irb_box.insert(0, record[19])
+        e_check_quote_box.insert(0, record[20])
+        e_check_po_box.insert(0, record[21])
+        e_add_quote_po_oct_box.insert(0, record[22])
+        e_loca_plan_box.insert(0, record[23])
+        e_access_ts_tm_box.insert(0, record[24])
+        e_assign_ls_wf_box.insert(0, record[25])
+        e_access_platform_box.insert(0, record[26])
+        e_handover_ls_box.insert(0, record[27])
+        e_notes_text.insert(1.0, record[28])
+        e_to_do_textbox.insert(1.0, record[29])
 
 
     conn.commit()
@@ -578,6 +588,7 @@ def update_info():
         pm_name = :pm_name,
         pds_name = :pds_name,
         device_type = :device_type,
+        translation_vendor = :translation_vendor,
         cis = :cis,
         internal_kom = :internal_kom,
         check_wf = :check_wf,
@@ -608,6 +619,7 @@ def update_info():
         "pm_name": e_pm_name_box.get(),
         "pds_name": e_pds_name_box.get(),
         "device_type": e_device_type_box.get(),
+        "translation_vendor": e_translation_vendor_box.get(),
         "cis": e_cis_box.get(),
         "internal_kom": e_internal_kom_box.get(),
         "check_wf": e_check_wf_box.get(),
@@ -715,6 +727,18 @@ def handover_sls_report():
             print_records_report += str(record) + "\n"
             handover_file.write(print_records_report)
     handover_file.close()
+
+    """replace undesired elements from the csv"""
+    handover_file_read = open('handover.csv', "r")
+    text = ''.join([i for i in handover_file_read]).replace("(","")\
+        .replace("\\n",'\\')\
+        .replace(")","")
+    handover_file_write=open('handover.csv', "w")
+    handover_file_write.writelines(text)
+    handover_file_write.close()
+
+
+
     absolute_path = os.path.dirname(os.path.abspath(__file__))
     file_path = absolute_path + '\handover.csv'
     os.startfile(file_path)

@@ -1,8 +1,8 @@
-Sponsor: Pfizer
+Sponsor: Sponsor
 Study code: A-1111-2222
 Language number: 30
-PM: Xulescu
-PDS: 
-Device: 
-Translation vendor: 
-CIS: 
+PM: PM
+PDS: PDS
+Device: J5
+Translation vendor: Lionx
+CIS: No

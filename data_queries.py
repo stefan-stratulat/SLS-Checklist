@@ -12,35 +12,31 @@ c.execute("""CREATE TABLE IF NOT EXISTS studies(
         pm_name text,
         pds_name text,
         device_type text,
+        translation_vendor text,
         cis text,
         internal_kom text,
-        check_wf integer,
-        sls_task integer,
-        draft_lp integer,
-        loca_kom integer,
-        check_msr integer,
-        check_mqrg integer,
-        check_ldc integer,
-        check_paper_source integer,
-        check_translation_service integer,
-        check_tft integer,
-        check_irb integer,
-        check_quote integer,
-        check_po integer,
-        add_quote_po_oct integer,
-        loca_plan integer,
-        access_ts_tm integer,
-        assign_ls_wf integer,
-        access_platform integer,
-        handover_ls integer,
+        check_wf text,
+        sls_task text,
+        draft_lp text,
+        loca_kom text,
+        check_msr text,
+        check_mqrg text,
+        check_ldc text,
+        check_paper_source text,
+        check_translation_service text,
+        check_tft text,
+        check_irb text,
+        check_quote text,
+        check_po text,
+        add_quote_po_oct text,
+        loca_plan text,
+        access_ts_tm text,
+        assign_ls_wf text,
+        access_platform text,
+        handover_ls text,
         notes text,
         to_do text)""")
 
-
-c.execute("SELECT * from studies")
-column_name = [row[0] for row in c.description]
-
-print(*column_name)
 
 #select()
 conn.commit()
