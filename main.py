@@ -647,6 +647,8 @@ def update_info():
 
     conn.commit()
     conn.close()
+    #message to confirm the updated db
+    messagebox.showinfo(title="Updated", message="Database updated")
 
 """function to delete a study"""
 def delete():
@@ -686,7 +688,7 @@ def to_do_report():
 
     to_do_file.write(print_records_report)
     to_do_file.close()
-    
+
     absolute_path = os.path.dirname(os.path.abspath(__file__))
     file_path = absolute_path + "\\to_do.txt"
     os.startfile(file_path)
