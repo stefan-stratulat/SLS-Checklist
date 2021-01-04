@@ -675,27 +675,21 @@ def to_do_report():
     c = conn.cursor()
 
     """create a new window that will show the report"""
-    report = Tk()
-    report.title("To Do Report")
-    report.iconbitmap('images/fire_eye_alien.ico')
-    report.configure(bg="#add8e6")
-    report.geometry('300x400')
 
     c.execute("SELECT study_code,to_do FROM studies")
     records = c.fetchall()
 
+    to_do_file = open('to_do.txt','w+')
     print_records_report = ''
     for record in records:
-        print_records_report += "Study Code: "+str(record[0])+"\n"+str(record[1]) +"\n"
+        print_records_report += "Study Code: "+str(record[0])+"\n"+str(record[1])
 
-    #widgets
-
-    close_report_btn = Button(report,text="Close",command=report.destroy, padx=10, pady=10)
-    query_label_report = Label(report, text=print_records_report,bg="#add8e6")
-
-    #grid
-    close_report_btn.grid(row=0,column=0,columnspan=2,padx=5,pady=5,ipadx=50)
-    query_label_report.grid(row=1, column=0, columnspan=2,rowspan=30)
+    to_do_file.write(print_records_report)
+    to_do_file.close()
+    
+    absolute_path = os.path.dirname(os.path.abspath(__file__))
+    file_path = absolute_path + "\\to_do.txt"
+    os.startfile(file_path)
 
     conn.commit()
     conn.close()
