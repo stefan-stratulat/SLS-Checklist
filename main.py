@@ -725,7 +725,8 @@ def handover_sls_report():
     #add all the data in the csv file
     for record in records:
             print_records_report += str(record) + "\n"
-            handover_file.write(print_records_report)
+
+    handover_file.write(print_records_report)
     handover_file.close()
 
     """replace undesired elements from the csv"""
